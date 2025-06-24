@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>売上・スタッフ予測ダッシュボード</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f6;
+    }
+
+    .sidebar {
+      width: 230px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #ffffff;
+      border-right: 1px solid #ddd;
+      padding: 2rem 1rem;
+    }
+
+    .sidebar h5 {
+      font-weight: 700;
+      color: #2b5797;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 15px;
+      color: #444;
+      text-decoration: none;
+      padding: 0.65rem 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .sidebar nav a i {
+      margin-right: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #e7f0fa;
+      color: #2b5797;
+    }
+
+    .main {
+      margin-left: 230px;
+      padding: 2.5rem;
+    }
+
+    .card-form {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+    }
+
+    .btn-submit {
+      background-color: #2b5797;
+      color: #fff;
+      border: none;
+      transition: 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #1b3f73;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    h3 {
+      color: #2b5797;
+      font-weight: 600;
+    }
+
+    .calendar-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .calendar-card th, .calendar-card td {
+      width: 14.28%;
+    }
+
+    .calendar-card .today {
+      background-color: #2b5797;
+      color: white;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h5 class="text-center">ShiftAI</h5>
+    <nav>
+      <a href="#"><i class="fas fa-chart-line"></i> ダッシュボード</a>
+      <a href="#"><i class="fas fa-pen"></i> データ入力</a>
+      <a href="#"><i class="fas fa-magic"></i> 予測</a>
+      <a href="#"><i class="fas fa-gear"></i> 設定</a>
+    </nav>
+  </div>
+
+  <div class="main">
+    <div class="calendar-card">
+      <h4 class="mb-3 text-primary fw-semibold">ダッシュボード</h4>
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <button class="btn btn-outline-primary btn-sm">&lt;</button>
+        <h5 class="m-0">2024年6月</h5>
+        <button class="btn btn-outline-primary btn-sm">&gt;</button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-muted">26</td><td class="text-muted">27</td><td class="text-muted">28</td><td class="text-muted">29</td><td class="text-muted">30</td><td class="text-muted">31</td><td>1</td>
+            </tr>
+            <tr>
+              <td>2</td><td>3</td><td>4</td><td>5</td><td class="today">6</td><td>7</td><td>8</td>
+            </tr>
+            <tr>
+              <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+            </tr>
+            <tr>
+              <td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+            </tr>
+            <tr>
+              <td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+            </tr>
+            <tr>
+              <td>30</td><td class="text-muted">1</td><td class="text-muted">2</td><td class="text-muted">3</td><td class="text-muted">4</td><td class="text-muted">5</td><td class="text-muted">6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="mb-4">売上・スタッフ数・祭り情報の入力</h3>
+    <div class="card-form">
+      <form>
+        <div class="mb-3">
+          <label for="date" class="form-label">日付</label>
+          <input type="date" class="form-control" id="date" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="sales" class="form-label">売上（円）</label>
+          <input type="number" class="form-control" id="sales" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="staffCount" class="form-label">スタッフ数</label>
+          <input type="number" class="form-control" id="staffCount" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">祭りの有無</label>
+          <select class="form-select" id="festival" required>
+            <option value="">選択してください</option>
+            <option value="1">あり</option>
+            <option value="0">なし</option>
+          </select>
+        </div>
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-submit btn-lg">
+            来週の予測 <i class="fas fa-arrow-right ms-2"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
