@@ -86,24 +86,6 @@
       color: #2b5797;
       font-weight: 600;
     }
-
-    .calendar-card {
-      background: #ffffff;
-      border-radius: 1rem;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .calendar-card th, .calendar-card td {
-      width: 14.28%;
-    }
-
-    .calendar-card .today {
-      background-color: #2b5797;
-      color: white;
-      border-radius: 50%;
-    }
   </style>
 </head>
 <body>
@@ -119,65 +101,37 @@
   </div>
 
   <div class="main">
-    <div class="calendar-card">
-      <h4 class="mb-3 text-primary fw-semibold">ダッシュボード</h4>
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <button class="btn btn-outline-primary btn-sm">&lt;</button>
-        <h5 class="m-0">2024年6月</h5>
-        <button class="btn btn-outline-primary btn-sm">&gt;</button>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-bordered text-center align-middle">
-          <thead class="table-light">
-            <tr>
-              <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-muted">26</td><td class="text-muted">27</td><td class="text-muted">28</td><td class="text-muted">29</td><td class="text-muted">30</td><td class="text-muted">31</td><td>1</td>
-            </tr>
-            <tr>
-              <td>2</td><td>3</td><td>4</td><td>5</td><td class="today">6</td><td>7</td><td>8</td>
-            </tr>
-            <tr>
-              <td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-            </tr>
-            <tr>
-              <td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
-            </tr>
-            <tr>
-              <td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
-            </tr>
-            <tr>
-              <td>30</td><td class="text-muted">1</td><td class="text-muted">2</td><td class="text-muted">3</td><td class="text-muted">4</td><td class="text-muted">5</td><td class="text-muted">6</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
     <h3 class="mb-4">売上・スタッフ数・祭り情報の入力</h3>
     <div class="card-form">
-      <form>
+      <form action="/user_input" method="POST">
         <div class="mb-3">
           <label for="date" class="form-label">日付</label>
-          <input type="date" class="form-control" id="date" required>
+          <input type="date" class="form-control" id="date" name="date" required>
         </div>
 
         <div class="mb-3">
           <label for="sales" class="form-label">売上（円）</label>
-          <input type="number" class="form-control" id="sales" required>
+          <input type="number" class="form-control" id="sales" name="sales" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="customer_num" class="form-label">客数</label>
+          <input type="number" class="form-control" id="customer_num" name="customer_num" required>
         </div>
 
         <div class="mb-3">
           <label for="staffCount" class="form-label">スタッフ数</label>
-          <input type="number" class="form-control" id="staffCount" required>
+          <input type="number" class="form-control" id="staffCount" name="staffCount" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="staffName" class="form-label">スタッフ名前</label>
+          <input type="text" class="form-control" id="staffName" name="staffName" required>
         </div>
 
         <div class="mb-4">
-          <label class="form-label">祭りの有無</label>
-          <select class="form-select" id="festival" required>
+          <label for="festival" class="form-label">祭りの有無</label>
+          <select class="form-select" id="festival" name="festival" required>
             <option value="">選択してください</option>
             <option value="1">あり</option>
             <option value="0">なし</option>
@@ -186,12 +140,19 @@
 
         <div class="text-end">
           <button type="submit" class="btn btn-submit btn-lg">
-            来週の予測 <i class="fas fa-arrow-right ms-2"></i>
+            保存 <i class="fas fa-arrow-right ms-2"></i>
           </button>
         </div>
       </form>
     </div>
   </div>
-
+  <form action="/result_form" method="GET">
+    <div class="text-end mt-3">
+      <button type="submit" class="btn btn-submit btn-lg">
+        来週の予測 <i class="fas fa-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </form>
+  
 </body>
 </html>
